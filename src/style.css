@@ -1,0 +1,153 @@
+/* ===========================================================
+   VibeFrame Design Tokens
+   컨셉: "설계도(blueprint) 위에서 UI를 그린다"
+   - 배경: 짙은 네이비(청사진 용지를 반전시킨 느낌)
+   - 강조색: 제도용 연필 같은 앰버, 보조로 청사진 라인 시안
+   - 패널/구조 텍스트는 모노스페이스(실제로 JSON 트리를 다루는
+     도구이므로 장식이 아니라 "이것은 구조다"라는 의미로 사용)
+   - 캔버스 내부 콘텐츠(사용자가 만드는 실제 UI)는 가독성 좋은
+     시스템 산세리프 + 한글 Pretendard 폴백
+   =========================================================== */
+
+:root {
+  --bg: #0f1420;
+  --bg-canvas: #f4f5f7;
+  --panel: #161c2c;
+  --panel-alt: #1c2436;
+  --border: #263148;
+  --border-soft: #1f2738;
+  --text: #e7ecf5;
+  --text-muted: #7c8aa3;
+  --accent: #f2a93c;
+  --accent-strong: #ffbf5c;
+  --accent-ink: #241a05;
+  --line: #5ec8d8;
+  --danger: #e8615c;
+  --success: #56c98d;
+
+  --font-ui: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-content: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-content);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.vf-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.vf-panel-title {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.vf-btn {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  background: var(--panel-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.vf-btn:hover {
+  border-color: var(--text-muted);
+}
+.vf-btn.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.vf-btn.primary:hover {
+  background: var(--accent-strong);
+}
+.vf-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.vf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.vf-field label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.vf-field input,
+.vf-field select,
+.vf-field textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 6px 8px;
+  font-size: 13px;
+}
+.vf-field input:focus,
+.vf-field select:focus,
+.vf-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.vf-field-row {
+  display: flex;
+  gap: 8px;
+}
+.vf-field-row .vf-field {
+  flex: 1;
+}
