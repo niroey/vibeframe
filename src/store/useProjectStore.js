@@ -236,6 +236,14 @@ export const useProjectStore = defineStore('project', () => {
     if (complete) commit('마우스로 크기 조절')
   }
 
+  /** 캔버스/컨테이너 안에서 자유 배치한 좌표를 기록합니다. */
+  function positionNode(id, style, complete = false) {
+    const node = findNode(id)?.node
+    if (!node) return
+    node.style = { ...node.style, position: 'absolute', ...style }
+    if (complete) commit('요소 자유 이동')
+  }
+
   function setAction(id, action, label = '액션 설정') {
     const found = findNode(id)
     if (!found) return
@@ -397,6 +405,7 @@ export const useProjectStore = defineStore('project', () => {
     addNode,
     updateNode,
     resizeNode,
+    positionNode,
     setAction,
     deleteNode,
     addPage,

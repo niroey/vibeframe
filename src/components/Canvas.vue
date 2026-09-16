@@ -91,6 +91,7 @@ function onRootClick(e) {
 .vf-canvas-frame {
   background: var(--bg-canvas);
   min-height: 640px;
+  position: relative;
   box-shadow: 0 0 0 1px var(--border-soft), 0 20px 60px rgba(0, 0, 0, 0.45);
   transition: width 0.15s ease;
 }
