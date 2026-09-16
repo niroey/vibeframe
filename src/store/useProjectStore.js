@@ -325,9 +325,15 @@ export const useProjectStore = defineStore('project', () => {
   }
 
   async function login(nickname) {
-    const response = await fetch('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nickname }) })
-    if (!response.ok) throw new Error((await response.json()).error || '사용자 저장에 실패했습니다.')
-    user.value = await response.json()
+    const cleanNickname = String(nickname || '').trim()
+    try {
+      const response = await fetch('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nickname: cleanNickname }) })
+      if (!response.ok) throw new Error('사용자 저장 API 오류')
+      user.value = await response.json()
+    } catch {
+      // 서버 없이 GitHub에서 바로 실행해도 동일한 닉네임 작업 공간으로 진입합니다.
+      user.value = { id: `offline-${encodeURIComponent(cleanNickname.toLowerCase())}`, nickname: cleanNickname, offline: true }
+    }
     const storageKey = `vibeframe-document:${user.value.id}`
     const saved = localStorage.getItem(storageKey)
     document.value = buildInitialDocument()
