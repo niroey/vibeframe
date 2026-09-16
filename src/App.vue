@@ -122,3 +122,5 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-bottom-color: var(--accent);
 }
 </style>
+
+// coderabbit 추가해봄
